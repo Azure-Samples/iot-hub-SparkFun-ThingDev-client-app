@@ -7,8 +7,8 @@ This repo contains an arduino application that runs on board SparkFun ESP8266 Th
 ## Install board with your Arduino IDE
 1. Start Arduino and open Preferences window.
 2. Enter http://arduino.esp8266.com/stable/package_esp8266com_index.json into Additional Board Manager URLs field. You can add multiple URLs, separating them with commas.
-3. Open Boards Manager from `Tools > Board` menu and install esp8266 platform 2.2.0 or later
-4. Select your ESP8266 board from `Tools > Board` menu after installation
+3. Open Boards Manager from `Tools > Board` menu and install esp8266 platform 2.2.0 or later.
+4. Select your ESP8266 board from `Tools > Board` menu after installation.
 
 ## Install libraries
 Install the following libraries from `Sketch -> Include library -> Manage libraries`
