@@ -51,5 +51,6 @@ install:
   - arduino --install-library "Adafruit Unified Sensor"
   # a slash bug in the arduino IoT lib
   - sed -i -e 's/azure_c_shared_utility\\crt_abstractions.h/azure_c_shared_utility\/crt_abstractions.h/g' /home/travis/Arduino/libraries/AzureIoTHub/src/esp8266/azcpgmspace.h
+  - sed -i -e 's/azure_umqtt_c\\mqtt_client.h/azure_umqtt_c\/mqtt_client.h/g' /home/travis/Arduino/libraries/AzureIoTProtocol_MQTT/src/AzureIoTProtocol_MQTT.h
 script:
   - buildExampleSketch app
