@@ -16,9 +16,10 @@ Install the following libraries from `Sketch -> Include library -> Manage librar
 
 * AzureIoTHub
 * AzureIoTUtility
-* AzureIoTProtocol_HTTP
+* AzureIoTProtocol_MQTT
 * ArduinoJson
 * DHT sensor library
+* Adafruit Unified Sensor
 
 ## Connect your sensor with your board
 ### Connect with a physical DHT22 sensor
