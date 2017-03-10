@@ -58,6 +58,18 @@ static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer
     }
 }
 
+void start()
+{
+    LogInfo("Start to send temperature and humidity data");
+    messageSending = true;
+}
+
+void stop()
+{
+    LogInfo("Stop to send temperature and humidity data");
+    messageSending = false; 
+}
+
 IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE message, void* userContextCallback)
 {
     IOTHUBMESSAGE_DISPOSITION_RESULT result;
@@ -99,14 +111,4 @@ int deviceMethodCallback(const char * methodName, const unsigned char * payload,
         result = 404;
     }
     return result;
-}
-
-void start()
-{
-    messageSending = true;
-}
-
-void stop()
-{
-    messageSending = false; 
 }
