@@ -71,23 +71,42 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
     else
     {
         /*buffer is not zero terminated*/
-        char* temp = (char*)malloc(size + 1);
-        if (temp == NULL)
-        {
-            LogInfo("Failed to malloc for command");
-            result = IOTHUBMESSAGE_REJECTED;
-        }
-        else
-        {
-           memcpy(temp, buffer, size);
-           temp[size] = '\0';
-           LogInfo("Receive message: %s", temp);
+        LogInfo("Receive C2D message: %s", buffer);
+        blinkLED();
+    }
+    return IOTHUBMESSAGE_ACCEPTED;
+}
 
-           executeCommand(temp);
-
-            free(temp);
-            result = IOTHUBMESSAGE_ACCEPTED;
-        }
+int deviceMethodCallback(const char * methodName, const unsigned char * payload, size_t size, unsigned char ** response, size_t * response_size, void * userContextCallback)
+{
+    LogInfo("Try to invoke method %s", methodName);
+    int result = 200;
+    *response_size = 1;
+    *response = (unsigned char *)malloc(*response_size);
+    sprintf((char *)(*response), "1");
+    if(strcmp(methodName, "start") == 0)
+    {
+        start();
+    }
+    else if(strcmp(methodName, "stop") == 0)
+    {
+        stop();
+    }
+    else
+    {
+        LogInfo("No method %s found", methodName);
+        sprintf((char *)(*response), "0");
+        result = 404;
     }
     return result;
+}
+
+void start()
+{
+    messageSending = true;
+}
+
+void stop()
+{
+    messageSending = false; 
 }
