@@ -60,13 +60,13 @@ static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer
 
 void start()
 {
-    LogInfo("Start to send temperature and humidity data");
+    LogInfo("Start sending temperature and humidity data");
     messageSending = true;
 }
 
 void stop()
 {
-    LogInfo("Stop to send temperature and humidity data");
+    LogInfo("Stop sending temperature and humidity data");
     messageSending = false; 
 }
 
@@ -92,10 +92,11 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
 int deviceMethodCallback(const char * methodName, const unsigned char * payload, size_t size, unsigned char ** response, size_t * response_size, void * userContextCallback)
 {
     LogInfo("Try to invoke method %s", methodName);
+    char * onSuccess = "\"Successfully invoke device method\"";
+    char * notFound = "\"No method found\"";
+    char * responseMessage = onSuccess;
     int result = 200;
-    *response_size = 1;
-    *response = (unsigned char *)malloc(*response_size);
-    sprintf((char *)(*response), "1");
+    
     if(strcmp(methodName, "start") == 0)
     {
         start();
@@ -107,8 +108,13 @@ int deviceMethodCallback(const char * methodName, const unsigned char * payload,
     else
     {
         LogInfo("No method %s found", methodName);
-        sprintf((char *)(*response), "0");
+        responseMessage = notFound;
         result = 404;
     }
+
+    *response_size = strlen(responseMessage);
+    *response = (unsigned char *)malloc(*response_size);
+    strncpy((char *)(*response), responseMessage, *response_size);
+    
     return result;
 }
