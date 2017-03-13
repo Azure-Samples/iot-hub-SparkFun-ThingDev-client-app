@@ -1,5 +1,8 @@
 static WiFiClientSecure sslClient; // for ESP8266
 
+const char * onSuccess = "\"Successfully invoke device method\"";
+const char * notFound = "\"No method found\"";
+
 /*
  * The new version of AzureIoTHub library change the AzureIoTHubClient signature.
  * As a temporary solution, we will test the definition of AzureIoTHubVersion, which is only defined
@@ -92,9 +95,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
 int deviceMethodCallback(const char * methodName, const unsigned char * payload, size_t size, unsigned char ** response, size_t * response_size, void * userContextCallback)
 {
     LogInfo("Try to invoke method %s", methodName);
-    char * onSuccess = "\"Successfully invoke device method\"";
-    char * notFound = "\"No method found\"";
-    char * responseMessage = onSuccess;
+    const char * responseMessage = onSuccess;
     int result = 200;
     
     if(strcmp(methodName, "start") == 0)
