@@ -37,7 +37,7 @@ static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userCon
     messagePending = false;
 }
 
-static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer)
+static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer, bool temperatureAlert)
 {
     IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromByteArray((const unsigned char*)buffer, strlen(buffer));
     if (messageHandle == NULL)
@@ -46,6 +46,8 @@ static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer
     }
     else
     {
+        MAP_HANDLE properties = IoTHubMessage_Properties(messageHandle);
+        Map_Add(properties, "temperatureAlert", temperatureAlert ? "true" : "false");
         LogInfo("Sending message: %s", buffer);
         if (IoTHubClient_LL_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, NULL) != IOTHUB_CLIENT_OK)
         {
@@ -86,7 +88,17 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
     else
     {
         /*buffer is not zero terminated*/
-        LogInfo("Receive C2D message: %s", buffer);
+        char *temp = (char *)malloc(size + 1);
+
+        if (temp == NULL)
+        {
+            return IOTHUBMESSAGE_ABANDONED;
+        }
+    
+        strncpy(temp, (const char *)buffer, size);
+        temp[size] = '\0';
+        LogInfo("Receive C2D message: %s", temp);
+        free(temp);
         blinkLED();
     }
     return IOTHUBMESSAGE_ACCEPTED;
