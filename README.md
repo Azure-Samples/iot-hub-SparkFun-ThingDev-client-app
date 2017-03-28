@@ -1,5 +1,5 @@
 # IoT Hub SparkFun ESP8266 Thing-Dev Client application
-[![Build Status](https://travis-ci.com/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app.svg?token=5ZpmkzKtuWLEXMPjmJ6P&branch=master)](https://travis-ci.com/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app)
+[![Build Status](https://travis-ci.org/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app.svg?branch=master)](https://travis-ci.org/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app)
 
 > This repo contains the source code to help you get familiar with Azure IoT using the Azure IoT SparkFun ESP8266 Thing-Dev Starter Kit. You will find the [lesson-based tutorials on Azure.com](#).
 
