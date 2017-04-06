@@ -14,22 +14,22 @@ void initSerial()
  *        timeout  - If after timeout(ms), return false with nothing saved to buf.
  *                   If no timeout <= 0, this function will not return until there is something read.
  */
-bool readFromSerial(char * prompt, char * buf, int maxLen, int timeout)
+bool readFromSerial(char *prompt, char *buf, int maxLen, int timeout)
 {
     int timer = 0, delayTime = 1000;
     String input = "";
-    if(maxLen <= 0)
+    if (maxLen <= 0)
     {
         // nothing can be read
         return false;
     }
 
     Serial.println(prompt);
-    while(1)
+    while (1)
     {
         input = Serial.readString();
         int len = input.length();
-        if(len > maxLen)
+        if (len > maxLen)
         {
             LogInfo("Your input should less than %d character(s), now you input %d characters\n", maxLen, len);
         }
@@ -42,7 +42,7 @@ bool readFromSerial(char * prompt, char * buf, int maxLen, int timeout)
 
         // if timeout, return false directly
         timer += delayTime;
-        if(timeout > 0 && timer >= timeout)
+        if (timeout > 0 && timer >= timeout)
         {
             LogInfo("You input nothing, skip...");
             return false;
