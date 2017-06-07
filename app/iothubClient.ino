@@ -8,7 +8,11 @@ const char *notFound = "\"No method found\"";
  * As a temporary solution, we will test the definition of AzureIoTHubVersion, which is only defined
  *    in the new AzureIoTHub library version. Once we totally deprecate the last version, we can take
  *    the #ifdef out.
+ * Break changes in version 1.0.34: AzureIoTHub library removed AzureIoTClient class.
+ * So we remove the code below to avoid compile error.
  */
+
+/*
 #ifdef AzureIoTHubVersion
 static AzureIoTHubClient iotHubClient;
 void initIoThubClient()
@@ -22,7 +26,8 @@ void initIoThubClient()
     iotHubClient.begin();
 }
 #endif
-
+ */
+ 
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
 {
     if (IOTHUB_CLIENT_CONFIRMATION_OK == result)

@@ -85,7 +85,12 @@ void setup()
     initWifi();
     initTime();
     initSensor();
-    initIoThubClient();
+    
+    /*
+    * Break changes in version 1.0.34: AzureIoTHub library removed AzureIoTClient class.
+    * So we remove the code below to avoid compile error.
+    */
+    // initIoThubClient();
 
     iotHubClientHandle = IoTHubClient_LL_CreateFromConnectionString(connectionString, MQTT_Protocol);
     if (iotHubClientHandle == NULL)
