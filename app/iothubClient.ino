@@ -32,12 +32,12 @@ static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userCon
 {
     if (IOTHUB_CLIENT_CONFIRMATION_OK == result)
     {
-        Serial.println("Message sent to Azure IoT Hub");
+        Serial.println("Message sent to Azure IoT Hub.");
         blinkLED();
     }
     else
     {
-        Serial.println("Failed to send message to Azure IoT Hub");
+        Serial.println("Failed to send message to Azure IoT Hub.");
     }
     messagePending = false;
 }
@@ -47,21 +47,21 @@ static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer
     IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromByteArray((const unsigned char *)buffer, strlen(buffer));
     if (messageHandle == NULL)
     {
-        Serial.println("unable to create a new IoTHubMessage");
+        Serial.println("Unable to create a new IoTHubMessage.");
     }
     else
     {
         MAP_HANDLE properties = IoTHubMessage_Properties(messageHandle);
         Map_Add(properties, "temperatureAlert", temperatureAlert ? "true" : "false");
-        Serial.printf("Sending message: %s", buffer);
+        Serial.printf("Sending message: %s.\r\n", buffer);
         if (IoTHubClient_LL_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, NULL) != IOTHUB_CLIENT_OK)
         {
-            Serial.println("Failed to hand over the message to IoTHubClient");
+            Serial.println("Failed to hand over the message to IoTHubClient.");
         }
         else
         {
             messagePending = true;
-            Serial.println("IoTHubClient accepted the message for delivery");
+            Serial.println("IoTHubClient accepted the message for delivery.");
         }
 
         IoTHubMessage_Destroy(messageHandle);
@@ -70,13 +70,13 @@ static void sendMessage(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer
 
 void start()
 {
-    Serial.println("Start sending temperature and humidity data");
+    Serial.println("Start sending temperature and humidity data.");
     messageSending = true;
 }
 
 void stop()
 {
-    Serial.println("Stop sending temperature and humidity data");
+    Serial.println("Stop sending temperature and humidity data.");
     messageSending = false;
 }
 
@@ -87,7 +87,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
     size_t size;
     if (IoTHubMessage_GetByteArray(message, &buffer, &size) != IOTHUB_MESSAGE_OK)
     {
-        Serial.println("unable to IoTHubMessage_GetByteArray");
+        Serial.println("Unable to IoTHubMessage_GetByteArray.");
         result = IOTHUBMESSAGE_REJECTED;
     }
     else
@@ -102,7 +102,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
 
         strncpy(temp, (const char *)buffer, size);
         temp[size] = '\0';
-        Serial.printf("Receive C2D message: %s", temp);
+        Serial.printf("Receive C2D message: %s.\r\n", temp);
         free(temp);
         blinkLED();
     }
@@ -111,7 +111,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
 
 int deviceMethodCallback(const char *methodName, const unsigned char *payload, size_t size, unsigned char **response, size_t *response_size, void *userContextCallback)
 {
-    Serial.printf("Try to invoke method %s", methodName);
+    Serial.printf("Try to invoke method %s.\r\n", methodName);
     const char *responseMessage = onSuccess;
     int result = 200;
 
@@ -125,7 +125,7 @@ int deviceMethodCallback(const char *methodName, const unsigned char *payload, s
     }
     else
     {
-        Serial.printf("No method %s found", methodName);
+        Serial.printf("No method %s found.\r\n", methodName);
         responseMessage = notFound;
         result = 404;
     }
