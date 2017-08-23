@@ -1,12 +1,18 @@
+---
+services: iot-hub
+platforms: arduino
+author: xshi
+---
+
 # IoT Hub SparkFun ESP8266 Thing-Dev Client application
 [![Build Status](https://travis-ci.org/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app.svg?branch=master)](https://travis-ci.org/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app)
 
-> This repo contains the source code to help you get familiar with Azure IoT using the Azure IoT SparkFun ESP8266 Thing-Dev Starter Kit. You will find the [lesson-based tutorials on Azure.com](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-sparkfun-esp8266-thing-dev-get-started).
+> This repo contains the source code to help you get familiar with Azure IoT using the Azure IoT SparkFun ESP8266 Thing-Dev Starter Kit. You will find the [lesson-based tutorials on Azure.com](https://docs.microsoft.com/azure/iot-hub/iot-hub-sparkfun-esp8266-thing-dev-get-started).
 
 This repo contains an arduino application that runs on board SparkFun ESP8266 Thing-Dev with a DHT22 temperature&humidity sensor, and then sends these data to your IoT hub. At the same time, this application receives Cloud-to-Device message from your IoT hub, and takes actions according to the C2D command. 
 
 ## Prepare your Azure IoT Hub
-You can follow [this page](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-sparkfun-esp8266-thing-dev-get-started) to create your Azure IoT hub and register your device.
+You can follow [this page](https://docs.microsoft.com/azure/iot-hub/iot-hub-sparkfun-esp8266-thing-dev-get-started) to create your Azure IoT hub and register your device.
 
 ## Install board with your Arduino IDE
 1. Start Arduino and open Preferences window.
