@@ -1,7 +1,7 @@
 ---
 services: iot-hub
 platforms: arduino
-author: xshi
+author: shizn
 ---
 
 # IoT Hub SparkFun ESP8266 Thing-Dev Client application
