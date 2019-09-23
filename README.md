@@ -3,10 +3,11 @@ page_type: sample
 languages:
 - c
 products:
+- azure
 - azure-iot-hub
 name: IoT Hub SparkFun ESP8266 Thing-Dev Client application
-urlFragment: SparkFunESP8266Client
-description: This repo contains an arduino application that runs on board SparkFun ESP8266 Thing-Dev with a DHT22 temperature&humidity sensor, and then sends these data to your IoT hub.
+urlFragment: spark-fun-esp8266-client
+description: "This repo contains an arduino application that runs on board SparkFun ESP8266 Thing-Dev with a DHT22 temperature and humidity sensor."
 ---
 
 # IoT Hub SparkFun ESP8266 Thing-Dev Client application
